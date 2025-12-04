@@ -30,15 +30,22 @@ splitEachIndex s i
   where
     len = length s
 
--- Much faster algo O(n) instead of 0(n2): 1212 -> if 212121 contains 1212 -> 12 == 12
--- https://www.baeldung.com/cs/check-string-periodicity
--- (15s vs 1.4s in GHC interpreted mode, when it's compiled its 0.43s vs 0.5s (???) WTF it should be slower)
--- isInvalidId :: Int -> Bool
--- isInvalidId i =
---   let s = show i
---       ss = s ++ s
---       mid = init (drop 1 ss)
---   in isInfixOf s mid
+{-
+
+  Much faster algo O(n) instead of 0(n2): 1212 -> if 212121 contains 1212 -> 12 == 12
+  https://www.baeldung.com/cs/check-string-periodicity
+  15s vs 1.4s in GHC interpreted mode, when it's compiled it's 0.43s vs 0.5s
+  It's because O(n2) is worst case scenario which literally never happen here, and O(n) in this algorithm, does go thru all n
+  It would be different if id were much longer
+
+isInvalidId :: Int -> Bool
+isInvalidId i =
+  let s = show i
+      ss = s ++ s
+      mid = init (drop 1 ss)
+   in isInfixOf s mid
+
+-}
 
 isInvalidId :: Int -> Bool
 isInvalidId id = go $ div (length s) 2
