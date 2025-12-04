@@ -1,18 +1,18 @@
-import System.IO
 import Data.List
-import Text.Read
 import Data.Maybe
+import System.IO
+import Text.Read
 
-data DialPosition = DialPosition { position :: Int, zeroHits :: Int } deriving Show
+data DialPosition = DialPosition {position :: Int, zeroHits :: Int} deriving (Show)
 
 makeCombination :: String -> Maybe Int
 makeCombination [] = Nothing
-makeCombination (dir:rot) = do
-    rotation <- readMaybe rot
-    case dir of
-      'L' -> Just (-rotation)
-      'R' -> Just rotation
-      _ -> Nothing
+makeCombination (dir : rot) = do
+  rotation <- readMaybe rot
+  case dir of
+    'L' -> Just (-rotation)
+    'R' -> Just rotation
+    _ -> Nothing
 
 moveDial :: DialPosition -> Int -> DialPosition
 moveDial (DialPosition pos zeros) rot
@@ -25,9 +25,9 @@ moveDial (DialPosition pos zeros) rot
 
 inputCombinations :: DialPosition -> (DialPosition -> Int -> DialPosition) -> [Int] -> DialPosition
 inputCombinations dial _ [] = dial
-inputCombinations startDial dialRotationFunc (rotation:rotations) =
+inputCombinations startDial dialRotationFunc (rotation : rotations) =
   let newDial = dialRotationFunc startDial rotation
-  in inputCombinations newDial dialRotationFunc rotations
+   in inputCombinations newDial dialRotationFunc rotations
 
 initDial = DialPosition 50 0
 
