@@ -34,7 +34,7 @@ splitEachIndex s i
 
   Much faster algo O(n) instead of 0(n2): 1212 -> if 212121 contains 1212 -> 12 == 12
   https://www.baeldung.com/cs/check-string-periodicity
-  15s vs 1.4s in GHC interpreted mode, when it's compiled it's 0.43s vs 0.5s
+  15s vs 1.4s in GHC interpreted mode, when it's compiled it's 0.29s vs 0.5s
   It's because O(n2) is worst case scenario which literally never happen here, and O(n) in this algorithm, does go thru all n
   It would be different if id were much longer
 
@@ -48,11 +48,13 @@ isInvalidId i =
 -}
 
 isInvalidId :: Int -> Bool
-isInvalidId id = go $ div (length s) 2
+isInvalidId id = go $ div len 2
   where
+    len = length s
     s = show id
     go i
       | i <= 0 = False
+      | mod len i /= 0 = go (i - 1)
       | otherwise =
           let (x : xs) = splitEachIndex s i
            in all (== x) xs || go (i - 1)
