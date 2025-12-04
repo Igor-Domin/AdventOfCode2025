@@ -30,6 +30,15 @@ splitEachIndex s i
   where
     len = length s
 
+-- Much faster algo O(n) instead of 0(n2) 15s vs 1.4s: 1212 -> if 212121 contains 1212 -> 12 == 12
+-- https://www.baeldung.com/cs/check-string-periodicity
+-- isInvalidId :: Int -> Bool
+-- isInvalidId i =
+--   let s = show i
+--       ss = s ++ s
+--       mid = init (drop 1 ss)
+--   in isInfixOf s mid
+
 isInvalidId :: Int -> Bool
 isInvalidId id = go $ div (length s) 2
   where
