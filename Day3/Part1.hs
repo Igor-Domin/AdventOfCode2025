@@ -1,12 +1,12 @@
-import System.IO
-import Data.List
 import Data.Char
+import Data.List
 import Data.Maybe
+import System.IO
 
 quickJolt :: [Int] -> Int
-quickJolt bank = 10 * maxJolt + maximum (snd (splitAt (maxIndex + 1) bank))
+quickJolt bank = 10 * maxJolt + maximum (drop (maxIndex + 1) bank)
   where
-    maxJolt  = maximum (init bank)
+    maxJolt = maximum (init bank)
     maxIndex = fromJust (elemIndex maxJolt bank)
 
 main :: IO ()
