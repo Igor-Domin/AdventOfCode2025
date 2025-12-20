@@ -1,2 +1,21 @@
-.vscode/tasks.json
-.vscode/settings.json
+# Haskell build output
+dist-newstyle/
+dist/
+.stack-work/
+
+# GHC artifacts
+*.o
+*.hi
+*.dyn_o
+*.dyn_hi
+*.hie
+
+# Tooling caches (only if they appear in repo root)
+.hls/
+.ghcide/
+.hie-bios/
+
+# MacOS
+.DS_Store
+._*
+
